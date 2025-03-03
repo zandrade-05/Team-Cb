@@ -1,9 +1,10 @@
-* {
+body {
+    position: absolute;
+    top: 30%;
+    width: 100%;
     text-align: center;
-    margin: auto;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 12px 0;
-    border-color: black;
-    text-align: center;
+    font-size: 18px;
+    outline-color: black;
+    
 }
+
