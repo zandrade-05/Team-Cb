@@ -41,6 +41,7 @@ input {
     padding: 8px;
     width: 250px;
     border: 1px solid black;
+    border-radius: 25px;
 }
 
 button {
@@ -50,6 +51,7 @@ button {
     background-color: white;
     cursor: pointer;
     background-color: #706d6d;
+    border-radius: 6px;
 }
 
 footer {
