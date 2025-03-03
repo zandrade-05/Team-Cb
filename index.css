@@ -49,3 +49,10 @@ button {
     cursor: pointer;
     background-color: #706d6d;
 }
+
+footer {
+    margin-top: auto;
+    padding: 10px;
+    text-align: center;
+    width: 100%;
+}
