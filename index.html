@@ -1,24 +1,27 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8" />
-        <title>Scrum Suite</title>
-        <link rel="stylesheet" href="index.css"/>
-    </head>
 
-    <body>
-        <h1>Scrum Suite</h1>
+<head>
+    <meta charset="utf-8" />
+    <title>got scrum?</title>
+    <link rel="stylesheet" href="common.css">
+    <link rel="stylesheet" href="index.css" />
+</head>
 
-        <form>
-            <label for="name">Name:</label>
-            <input type="text" id="name" name="name" required><br><br>
-            <label for="roomnum">Room ID:</label>
-            <input type="text" id="roomnum" name="roomnum" required><br><br>
-            <a href="estimation.html"><button type="button">Estimate!</button></a>
-          </form>   
-          
-        <footer>
-            <p>Create your own Scrum Suite Room for free here: <a href="CreateRoom.html">Create New Room</a></p>
-        </footer>
-    </body>
+<body>
+    <header>
+        <h1>got scrum?</h1>
+    </header>
+    <form class="container" action="estimation.html">
+        <label for="username">Name:</label>
+        <input type="text" id="username" name="username" required><br><br>
+        <label for="roomnum">Room ID:</label>
+        <input type="text" id="roomnum" name="roomnum" required><br><br>
+        <button type="submit">Submit</button>
+    </form>
+    <footer>
+        <p>Create your own room for free here: <a href="CreateRoom.html">Create New Room</a></p>
+    </footer>
+</body>
+
 </html>
