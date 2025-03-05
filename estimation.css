@@ -164,14 +164,13 @@ h2 {
 
 #storyQueue li:nth-of-type(2) {
     padding: 0px 7px;
-    background-color: antiquewhite;
     margin: 0px;
     margin-bottom: 20px;
     margin-left: 10px;
     border-radius: 0px;
     text-align: center;
     height: 0px !important;
-    border-bottom: 2px black dashed;
+    border-bottom: 2px navy dashed;
     box-shadow: none;
 }
 
