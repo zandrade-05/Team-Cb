@@ -2,10 +2,6 @@
     font-family: 'gotmilk?';
     src: url('/Phenix\ American\ Regular.ttf') format('truetype');
 }
-body{
-    width: 100dvw;
-    height: 100dvh;
-}
 
 * {
     margin: 0px;

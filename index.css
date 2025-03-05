@@ -1,3 +1,5 @@
+
+
 body {
     display: flex;
     flex-direction: column;  
@@ -8,14 +10,7 @@ body {
     text-align: center;
     background-color: lightgrey;
 }
-body > div {
-    position: fixed;
-    top: 25px
-}
-header {
-    position: fixed;
-    top: 25px
-}
+
 h1 {
     margin-bottom: 40px; 
     border-radius: 25px;
@@ -64,6 +59,4 @@ footer {
     padding: 10px;
     text-align: center;
     width: 100%;
-    position: fixed;
-    bottom: 0;
 }
