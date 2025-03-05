@@ -78,8 +78,9 @@ section > div {
     font-weight: 300;
     line-height: 40px;
     padding: 0px 20px;
-    margin-left: 20vw;
+    margin-left: 10vw;
     margin-top: 10px;
+    text-align: right;
 }
 
 #currentQueue > div > h5 {
