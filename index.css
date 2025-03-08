@@ -1,3 +1,11 @@
+@font-face {
+    font-family: 'gotmilk?';
+    src: url('/Phenix\ American\ Regular.ttf') format('truetype');
+}
+
+* {
+    font-family: 'Times New Roman', Times, serif;
+}
 
 body {
     display: flex;
@@ -18,6 +26,8 @@ h1 {
     padding: 20px;
     width: 200px;
     height: 50px;
+    font-family: 'gotmilk?', 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+
 }
 
 .container {
@@ -58,7 +68,7 @@ button {
 
 footer {
     margin-top: auto;
-    padding: 10px 0;
+    padding: 10px;
     text-align: center;
     width: 100%;
 }
