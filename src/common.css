@@ -1,6 +1,6 @@
 @font-face {
     font-family: 'gotmilk?';
-    src: url('/Phenix\ American\ Regular.ttf') format('truetype');
+    src: url('./assets/Phenix\ American\ Regular.ttf') format('truetype');
 }
 
 * {
@@ -8,7 +8,7 @@
     font-family: 'Times New Roman', Times, serif;
 }
 
-h2, h3, h4, h5, h6, a, li {
+h2, h3, h4, h5, h6, a, li, ul {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
