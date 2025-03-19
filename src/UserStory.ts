@@ -44,7 +44,7 @@ class UserStoryQueue {
         return this.stories.length != 0;
     }
     public findAt(i: number): UserStory | undefined {
-        return this.stories.at(i);
+        return this.stories[i];
     }
     // get the next element in the array
     public nextStory(): UserStory | undefined {
