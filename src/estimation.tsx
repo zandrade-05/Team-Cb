@@ -67,7 +67,7 @@ const CurrentQueue = () => {
 const StQueue = () => {
     const List = () => {
         let stories = []
-        for (let index = 0; index < storyQueue.length - 2; index++) {
+        for (let index = 0; index < storyQueue.length - 1; index++) {
             if (index == 1) {
                 stories.push(<li key={storyQueue.length + 1}></li>)
             }
