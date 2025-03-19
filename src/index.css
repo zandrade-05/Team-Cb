@@ -6,7 +6,7 @@
     justify-content: center;
     align-items: center;
     text-align: center;
-    background-color: lightgrey;
+    background-color: rgba(0, 0, 128, 0.25); /*MD*/
 }
 
 .index h1 {
@@ -17,6 +17,7 @@
     padding: 20px;
     width: 200px;
     height: 50px;
+    margin-top: 50px; /*MD*/
 }
 
 .index label {
@@ -43,7 +44,7 @@
     border: 1px solid black;
     background-color: white;
     cursor: pointer;
-    background-color: #706d6d;
+    /* background-color: #706d6d; Removed by MD*/ 
     border-radius: 6px;
 }
 
@@ -52,4 +53,8 @@
     padding: 10px 0;
     text-align: center;
     width: 100%;
+}
+
+.index > button, .index > input, .index > h1 {
+    box-shadow:inset rgba(0, 0, 128, 0.25) 2px 2px 5px; /*MD*/
 }
