@@ -1,3 +1,5 @@
+import axios from "axios";
+const URL = "http://localhost:8080/api/";
 class UserStory {
     private name: string;
     private description: string;
@@ -30,15 +32,26 @@ class UserStory {
 
 class UserStoryQueue {
     private stories: UserStory[];
-    public length: number;
     constructor() {
         this.stories = [];
-        this.length = this.stories.length;
+    }
+    public async fetchStories(): Promise<void> {
+        let responses: any[] = [];
+        await axios.get(URL + "storyQueue")
+            .then((response) => {
+                responses = response.data;
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+        responses.forEach((story: any) => {
+            this.addStory(new UserStory(story.name, undefined));
+        }
+        )
     }
     // add to the array
     public addStory(story: UserStory): void {
         this.stories.push(story);
-        this.length = this.stories.length;
     }
     public isNext(): boolean {
         return this.stories.length != 0;
@@ -46,12 +59,19 @@ class UserStoryQueue {
     public findAt(i: number): UserStory | undefined {
         return this.stories[i];
     }
+    public getLength(): number {
+        return this.stories.length
+    }
+    public removeStory(id: number): void {
+        this.stories.splice(id, 1);
+    }
     // get the next element in the array
     public nextStory(): UserStory | undefined {
         let next = this.stories.shift();
-        this.length = this.stories.length;
         return next;
     }
-
+    public getStories(): UserStory[] {
+        return this.stories;
+    }
 }
 export { UserStory, UserStoryQueue };

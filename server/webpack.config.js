@@ -1,12 +1,13 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { watch } = require('fs');
 const isProduction = process.env.NODE_ENV == 'production';
 const stylesHandler = 'style-loader';
 
 const config = {
-            entry: './src/index.tsx',
+            entry: './src/js/index.tsx',
             output: {
-                path: path.resolve(__dirname, './'),
+                path: path.resolve(__dirname, "../client/dist"),
                 publicPath: '/'
             },
             resolve: {
@@ -14,12 +15,12 @@ const config = {
             },
             devServer: {
                 open: true,
-                host: 'localhost',
+                host: '0.0.0.0',
                 historyApiFallback: true,
             },
             plugins: [
                 new HtmlWebpackPlugin({
-                    template: './template/index.html'
+                    template: '../client/src/index.html'
                 })
             ],
             module: {

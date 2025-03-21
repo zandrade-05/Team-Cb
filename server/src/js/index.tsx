@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import ReactDOM from "react-dom/client";
 import Estimation from "./estimation";
-import "./common.css"
+import "../css/common.css"
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import JoinRoom, { CreateRoom } from "./home";
 const App = () => {
