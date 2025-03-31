@@ -144,14 +144,8 @@ const Estimations = (props) => {
 };
 const EstimationButton = (props) => {
     const submit = () => {
-        console.log("Estimation: " + props.card.getValue());
         if (currentStory != undefined) {
-            currentStory.setStoryValues(props.card.getValue());
-            storyQueue.removeStory(0);
-            estimations.addStory(currentStory);
             fetch.post("estimations", { story: currentStory, value: props.card.getValue() });
-            currentStory = storyQueue.findAt(0);
-            storyQueue.fetchStories();
         }
     };
     return ((0, jsx_runtime_1.jsx)("li", { children: (0, jsx_runtime_1.jsx)("button", { onClick: submit, value: props.card.getValue(), children: props.card.getValue() }) }));

@@ -102,6 +102,7 @@ const StQueue = (props: { storyQueue: UserStoryQueue }) => {
                 <List />
             </ol>
             <div></div>
+            <form><button>Add Story</button></form>
         </aside>
     )
 }
