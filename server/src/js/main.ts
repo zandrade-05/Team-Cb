@@ -1,3 +1,4 @@
+// restful server
 import path from "path";
 import express, { Express, NextFunction, Request, Response } from "express"
 import { getCards, getCard, getStoryQueue, getEstimations } from "./Data";
@@ -43,4 +44,4 @@ app.post("/api/estimations", (inRequest: Request, inResponse: Response) => {
     inResponse.json(inRequest.body);
     console.log(inRequest.body);
 });
-app.listen(port, () => { console.log("Server listening on port: " + port) });
+app.listen(port, () => { console.log("Server at: http://localhost:" + port) });

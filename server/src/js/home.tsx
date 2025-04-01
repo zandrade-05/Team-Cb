@@ -1,19 +1,18 @@
-import React from "react"
-import { Link, NavLink, useNavigate } from "react-router-dom";
-import "../css/index.css"
-const JoinRoom = () => {
+import { NavLink, useNavigate } from "react-router-dom";
+import "../../../client/dist/css/index.css";
+const JoinRoom = () => { // index.html
     return (<>
         <div className="index">
             <h1>Got Scrum?</h1>
             <Form type="join" />
             <footer>
-                <p>Create your own room for free here: <NavLink to={"/create-room"}>Create New Room</NavLink></p>
+                <p>Create your own room for free here: <NavLink to={"/create-room"}>Create New Room</NavLink></p> 
             </footer>
 
         </div>
     </>);
 }
-const CreateRoom = () => {
+const CreateRoom = () => { // create room page
     return (<>
         <div className="index">
             <h1>Create Room</h1>
@@ -24,7 +23,7 @@ const CreateRoom = () => {
         </div>
     </>)
 }
-const Form = (props: { type: string; }) => {
+const Form = (props: { type: string; }) => { // type is either create or join
     let navigate = useNavigate();
     let action: string;
     let nameField: string;

@@ -1,14 +1,13 @@
-import React, { useState } from "react";
 import ReactDOM from "react-dom/client";
 import Estimation from "./estimation";
-import "../css/common.css"
+import "../../../client/dist/css/common.css"
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import JoinRoom, { CreateRoom } from "./home";
-const App = () => {
+const App = () => { // displays page based on functions and url
     return (
         <BrowserRouter>
             <Routes>
-                <Route path="/">
+                <Route path="/"> /* base url path */
                     <Route path="" element={<JoinRoom />} />
                     <Route path="create-room" element={<CreateRoom />} />
                     <Route path="estimate" element={<Estimation />} />

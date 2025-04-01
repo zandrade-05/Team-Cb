@@ -5,9 +5,9 @@
   "private": false,
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "compile": "npx tsc && node ./dist/js/main.js",
+    "compile": "npx tsc && node ./server/dist/js/main.js",
     "build": "npx webpack build",
-    "start": "npx node ./node_modules/nodemon/bin/nodemon.js -e ts tsx --exec \"npm run build && npm run compile\""
+    "start": "npx node ./node_modules/nodemon/bin/nodemon.js -e ts,tsx --exec \"npm run build && npm run compile\""
   },
   "repository": {
     "type": "git",
