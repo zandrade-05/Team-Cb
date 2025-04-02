@@ -1,5 +1,4 @@
 import axios from "axios";
-const URL = "http://localhost:8080/api/";
 class UserStory {
     private name: string;
     private description: string;
@@ -36,6 +35,7 @@ class UserStoryQueue {
         this.stories = [];
     }
     public async fetchStories(): Promise<void> {
+        const URL = window.location.protocol + "//" + window.location.host + "/api/"; // base url for http requests
         let responses: any[] = [];
         await axios.get(URL + "storyQueue")
             .then((response) => {

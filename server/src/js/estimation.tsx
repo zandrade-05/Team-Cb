@@ -8,7 +8,7 @@ const storyQueue: UserStoryQueue = new UserStoryQueue();
 const estimations: UserStoryQueue = new UserStoryQueue();
 const cards: Cards = new Cards();
 let currentStory: UserStory | undefined;
-const URL = "http://localhost:8080/api/"; // base url for http requests
+const URL = window.location.protocol + "//" + window.location.host + "/api/"; // base url for http requests
 
 const fetch = axios.create({
     baseURL: URL,
@@ -138,7 +138,6 @@ const Estimations = (props: { estimations: UserStoryQueue }) => { // returns alr
     useEffect(() => { // gets estimated stories
         fetch.get("estimations").then((response) => {
             setEstimations(response.data);
-            console.log(response.data);
             response.data.forEach((story: any) => {
                 estimations.addStory(new UserStory(story.name, story.storyValues))
             }
@@ -150,7 +149,6 @@ const Estimations = (props: { estimations: UserStoryQueue }) => { // returns alr
 
         for (let index = 0; index < estimations.getLength(); index++) {
             estimatedStories.push(<Estimation key={index} userStory={estimations.findAt(index)} />)
-            console.log(estimations.getLength());
         }
         return estimatedStories;
     }

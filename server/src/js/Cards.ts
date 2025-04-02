@@ -1,5 +1,4 @@
 import axios from "axios";
-const URL = "http://localhost:8080/api/";
 
 class Card {
     private cardValue: number;
@@ -22,6 +21,7 @@ class Cards {
         this.cards = [];
     }
     public async fetchCards(): Promise<void> {
+        const URL = window.location.protocol + "//" + window.location.host + "/api/"; // base url for http requests
         let responses: any[] = [];
         await axios.get(URL + "cards")
             .then((response) => {
