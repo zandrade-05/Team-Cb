@@ -351,3 +351,22 @@ header>a:hover,
         grid-column: 6;
     }
 }
+
+.story-small {
+    background-color: #d4edda;
+    border-left: 4px solid #28a745;
+    padding: 8px;
+}
+
+.story-medium {
+    background-color: #fff3cd;
+    border-left: 4px solid #ffc107;
+    padding: 8px;
+}
+
+.story-large {
+    background-color: #f8d7da;
+    border-left: 4px solid #dc3545;
+    padding: 8px;
+}
+

@@ -125,12 +125,24 @@ const Story = (props: { story: UserStory | undefined; list: boolean }) => { // r
 
 const Estimations = (props: { estimations: UserStoryQueue }) => { // returns already estimated stories section
     let story: UserStory;
+<<<<<<< HEAD
+
+    const getStyleClass = (value: number) => {
+        if (value <= 3) return "story-small";
+        if (value <= 5) return "story-medium";
+        return "story-large";
+    }    
+    const Estimation = (props: { userStory: UserStory | undefined }) => {
+=======
     const Estimation = (props: { userStory: UserStory | undefined }) => { // returns an already estimated story
+>>>>>>> d228749522d0688ac9af738ee3f8ced808a11e38
         if (props.userStory !== undefined && props.userStory.getStoryValues() !== undefined) {
             story = new UserStory(props.userStory.toString(), props.userStory.getStoryValues());
             estimations.addStory(story)
             return (
-                <li>{props.userStory.toString()}: <br />{props.userStory.getStoryValues()}</li>
+                <li className={getStyleClass(props.userStory.getStoryValues()!)}>
+                {props.userStory.toString()}: <br />{props.userStory.getStoryValues()}
+                </li>
             )
         }
     }
