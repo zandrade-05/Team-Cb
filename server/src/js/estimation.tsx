@@ -128,7 +128,7 @@ const Estimations = (props: { estimations: UserStoryQueue }) => { // returns alr
     let story: UserStory;
     const getStyleClass = (value: number) => {
         if (value <= 3) return "story-small";
-        if (value <= 5) return "story-medium";
+        if (value <= 8) return "story-medium";
         return "story-large";
     }    
     const [currentEstimations, setEstimations] = React.useState(props.estimations);
