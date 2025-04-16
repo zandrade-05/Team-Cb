@@ -5,8 +5,46 @@ import { UserStory } from "../js/UserStory";
 import { CardDataAccess, EstimatedStoryDataAccess, StoryDataAccess } from "../db/dataAccess";
 import { Card } from "../js/Cards";
 import { HttpStatusCode } from "axios";
-const port = 8080;
+import WebSocket from "ws";
+
 const app: Express = express();
+
+//WebSocket server
+const port = 8080;
+const users: any = { };
+const wsServer = new WebSocket.Server({ port : 8080 }, function() {
+    console.log("Users WebSocket server ready");
+});
+wsServer.on("connection", (socket: WebSocket) => {
+    console.log("User Connected");
+//Hook up message handler
+socket.on("message", (inMsg: string) => {
+    console.log(`Message: ${inMsg}`);
+
+    const msgParts: string[] = inMsg.toString().split("_");
+    const message: string = msgParts[0];
+    const userID: string = msgParts[1];
+
+    switch (message) {
+        case "match":
+            //TODO: flesh this out
+
+    }
+})
+})
+
+//Create pid for each story and add to the collection
+const userID: string = (`pid ${new Date().getTime()}`);
+for(let i = 0; i < users; i++) {
+    users[userID] = { };
+}
+
+
+//Inform of connection and send the unique ID
+wsServer.send(`User connected_${userID}`);
+
+
+
 let storyCount = 0;
 app.use(express.json());
 app.use("/", express.static(path.join(__dirname, "../../client/dist")));
