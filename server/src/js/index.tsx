@@ -7,11 +7,9 @@ const App = () => { // displays page based on functions and url
     return (
         <BrowserRouter>
             <Routes>
-                <Route path="/"> /* base url path */
-                    <Route path="" element={<JoinRoom />} />
-                    <Route path="create-room" element={<CreateRoom />} />
-                    <Route path="estimate" element={<Estimation />} />
-                </Route>
+                <Route path="/" element={<JoinRoom />} />
+                <Route path="/create-room" element={<CreateRoom />} />
+                <Route path="/estimate" element={<Estimation />} />
             </Routes>
         </BrowserRouter>
     )

@@ -4,7 +4,7 @@ class UserStory {
     description: string;
     storyValues?: number;
     _id?: string;
-    constructor(name = "", id?: number, storyValues: undefined | number = undefined, description = "") {
+    constructor(name = "", description = "", id?: number, storyValues: undefined | number = undefined) {
         this.id = id;
         this.name = name;
         this.description = description;

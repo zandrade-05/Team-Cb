@@ -49,6 +49,7 @@
   "dependencies": {
     "@seald-io/nedb": "^4.1.1",
     "express": "^4.21.2",
-    "react-router-dom": "^7.3.0"
+    "react-router-dom": "^7.3.0",
+    "reactjs-popup": "^2.0.6"
   }
 }

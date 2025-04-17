@@ -63,7 +63,7 @@ app.post("/api/estimations", async (inRequest: Request, inResponse: Response) =>
 app.post("/api/storyQueue/", async (inRequest: Request, inResponse: Response) => {
     inResponse.type("json");
     const initStory: UserStory = inRequest.body;
-    const story: UserStory = await StoryDataAccess.getDataAccess().addStory(new UserStory(initStory.name, storyCount))
+    const story: UserStory = await StoryDataAccess.getDataAccess().addStory(new UserStory(initStory.name, initStory.description, storyCount))
     storyCount++;
     inResponse.json(story);
 });

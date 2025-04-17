@@ -11,7 +11,18 @@ li button {
     box-shadow: rgba(0, 0, 128, 0.25) 2px 2px 5px;
 }
 
-
+.modal {
+    display: flex;
+    flex-direction: column;
+}
+.modal #storyDesc {
+    resize: vertical;
+    max-height: 50vh;
+    min-height: fit-content;
+}
+.modal #storyName {
+    resize: none;
+}
 /* Body Styles */
 #root {
     display: grid;

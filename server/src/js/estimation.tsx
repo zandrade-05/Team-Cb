@@ -4,6 +4,8 @@ import "../../../client/dist/css/estimation.css"
 import { UserStoryQueue, UserStory } from "./UserStory"
 import { NavLink } from "react-router-dom"
 import { Card, Cards } from "./Cards"
+import Popup from "reactjs-popup"
+import 'reactjs-popup/dist/index.css'
 let storyQueue: UserStoryQueue = new UserStoryQueue();
 let estimations: UserStoryQueue = new UserStoryQueue();
 let cards: Cards = new Cards();
@@ -70,13 +72,30 @@ const CurrentQueue = (props: { storyQueue: UserStoryQueue; cards: Cards }) => { 
     )
 
 }
+const StoryDialogBox = () => {
+    let name = "";
+    let description = "";
+    return (
+        <Popup trigger={<button id="storyButton">Add Story</button>} modal nested>
+            <form className="modal" onSubmit={() => {
+                let story = new UserStory(name);
+                story.setDescription(description);
+                fetch.post("storyQueue", story)
+                }}>
+                <input placeholder="Enter Story Name Here" name="storyName" id="storyName" onChange={event => {name = event.target.value}} required></input>
+                <textarea placeholder="Enter Story Description Here" name="description" id="storyDesc" onChange={event => {description = event.target.value}}></textarea>
+                <button type="submit" id="">Add Story</button>
+            </form>
+        </Popup>
+    )
+}
 const StQueue = (props: { storyQueue: UserStoryQueue }) => { // returns the storyqueue section
     const [currentQueue, setQueue] = React.useState(props.storyQueue);
     useEffect(() => { // gets estimated stories
         fetch.get("storyQueue").then((response) => {
             setQueue(response.data);
             response.data.forEach((story: any) => {
-                storyQueue.addStory(new UserStory(story.name, story.id))
+                storyQueue.addStory(new UserStory(story.name, story.description, story.id))
             })
             storyQueue.getStories().sort((a, b) => a.id! - b.id!);
         })
@@ -89,9 +108,10 @@ const StQueue = (props: { storyQueue: UserStoryQueue }) => { // returns the stor
                 stories.push(<li key={storyQueue.getLength() + 1}></li>)
             }
         }
-        stories.push(<div key={0}><button id="storyButton" onClick={() => {
-            fetch.post("storyQueue", new UserStory("New story"))
-        }}>Add Story</button></div>)
+        stories.push(<StoryDialogBox key={0} />)
+        // stories.push(<div key={0}><button id="storyButton" onClick={() => {
+        //     fetch.post("storyQueue", new UserStory("New story"))
+        // }}>Add Story</button></div>)
         return stories
     }
     return (
@@ -109,7 +129,7 @@ const StQueue = (props: { storyQueue: UserStoryQueue }) => { // returns the stor
 const Story = (props: { story: UserStory | undefined; list: boolean }) => { // returns a single story to be listed on the storyQueue
     let story: UserStory;
     if (props.story !== undefined) {
-        story = new UserStory(props.story.toString(), props.story.id!);
+        story = new UserStory(props.story.toString(), props.story.description, props.story.id!);
         storyQueue.addStory(story)
         if (props.list) {
             return (
@@ -136,7 +156,7 @@ const Estimations = (props: { estimations: UserStoryQueue }) => { // returns alr
         fetch.get("estimations").then((response) => {
             setEstimations(response.data);
             response.data.forEach((story: any) => {
-                estimations.addStory(new UserStory(story.name, story.id, story.storyValues))
+                estimations.addStory(new UserStory(story.name, story.description, story.id, story.storyValues))
             }
             )
             estimations.getStories().sort((a, b) => a.id! - b.id!)
@@ -144,7 +164,7 @@ const Estimations = (props: { estimations: UserStoryQueue }) => { // returns alr
     }, [])
     const Estimation = (props: { userStory: UserStory | undefined }) => { // returns an already estimated story
         if (props.userStory !== undefined && props.userStory.getStoryValues() !== undefined) {
-            story = new UserStory(props.userStory.toString(), props.userStory.id!, props.userStory.getStoryValues());
+            story = new UserStory(props.userStory.toString(), props.userStory.description, props.userStory.id!, props.userStory.getStoryValues());
             estimations.addStory(story)
             return (
                 <li className={getStyleClass(props.userStory.getStoryValues()!)}>{props.userStory.toString()}: <br />{props.userStory.getStoryValues()}</li>
