@@ -224,19 +224,6 @@ h2 {
     border-radius: 10px;
 }
 
-#storyQueue li:nth-of-type(2) {
-    padding: 0px;
-    margin: 0px;
-    height: 0px;
-    /* margin-bottom: 20px;
-    margin-left: 10px;
-    border-radius: 0px;
-    text-align: center;
-    height: 0px !important;
-    border-bottom: 2px navy dashed;
-    box-shadow: none;
-    width: 100%; */
-}
 #storyButton {
     z-index: 999;
     background-color: white;
@@ -298,6 +285,28 @@ h2 {
     border-left: 4px solid #dc3545;
     padding: 8px;
 }
+
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: whitesmoke;
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 128, 0.50);
+    border-radius: 10px;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: navy;
+    border-radius: 25px;
+  }
 
 /* Action Styles */
 #storyQueue>ol>li>button:hover {
