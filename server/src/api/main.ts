@@ -10,40 +10,65 @@ import WebSocket from "ws";
 const app: Express = express();
 
 //WebSocket server
-const port = 8080;
+const WSPort = 3030;
+const RESTfulPort = 8080;
 const users: any = { };
-const wsServer = new WebSocket.Server({ port : 8080 }, function() {
-    console.log("Users WebSocket server ready");
+
+// const wsServer = new WebSocket.Server({ port : WSPort }, function() {
+//     console.log("Users WebSocket server ready");
+// });
+
+// wsServer.on("connection", (socket: WebSocket) => {
+//     console.log("User Connected");
+
+//     //Create pid for each story and add to the collection
+//     const userID: string = (`pid ${new Date().getTime()}`);
+
+//     for(let i = 0; i < users; i++) {
+//         users[userID] = { };
+//     }
+
+//     //Hook up message handler
+//     socket.on("message", (inMsg: string) => {
+//         console.log(`Message: ${inMsg}`);
+
+//         const msgParts: string[] = inMsg.toString().split("_");
+//         const message: string = msgParts[0];
+//         const userID: string = msgParts[1];
+
+//         switch (message) {
+//             case "match":
+//                 //TODO: flesh this out
+
+//         }
+
+//         // Inform of connection and send the unique ID
+//         socket.send(`User connected_${userID}`);
+//     });
+// });
+
+// wsServer.on("close", (socket: WebSocket) => {
+//     console.log("Connection closed")
+// });
+
+const wsServer = new WebSocket.Server({ port: WSPort }, () => {
+    console.log("This sever is servething! Huzzah!");
 });
+
+// Observer Pattern
 wsServer.on("connection", (socket: WebSocket) => {
-    console.log("User Connected");
-//Hook up message handler
-socket.on("message", (inMsg: string) => {
-    console.log(`Message: ${inMsg}`);
+    console.log("Client connected...");
+    
+    // Create unique identifier to the client
+    const pid: string = `pid${new Date().getTime()}`;
 
-    const msgParts: string[] = inMsg.toString().split("_");
-    const message: string = msgParts[0];
-    const userID: string = msgParts[1];
-
-    switch (message) {
-        case "match":
-            //TODO: flesh this out
-
-    }
-})
-})
-
-//Create pid for each story and add to the collection
-const userID: string = (`pid ${new Date().getTime()}`);
-for(let i = 0; i < users; i++) {
-    users[userID] = { };
-}
-
-
-//Inform of connection and send the unique ID
-wsServer.send(`User connected_${userID}`);
-
-
+    // construct connection message and return generated pid
+    const message = `connected_${pid}`;
+    console.log(message);
+    
+    // Send message to client through socket
+    socket.send(message);
+});
 
 let storyCount = 0;
 app.use(express.json());
@@ -105,4 +130,4 @@ app.post("/api/storyQueue/", async (inRequest: Request, inResponse: Response) =>
     storyCount++;
     inResponse.json(story);
 });
-app.listen(port, () => { console.log("Server at: http://localhost:" + port) });
+app.listen(RESTfulPort, () => { console.log("Server at: http://localhost:" + RESTfulPort) });
