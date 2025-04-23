@@ -7,7 +7,10 @@ import { useEffect, useState } from "react";
 
 const App = () => { // displays page based on functions and url
     
-    const [pid, setPid] = useState("");
+    const [uid, setUid] = useState("");
+	const [clickUid, setClickUid] = useState("");
+	const [allClick, setallClick] = useState("");
+    const [ws, setWs] = useState(new WebSocket("ws://localhost:3030"));
 
     useEffect(() => {
         const connection = new WebSocket("ws://localhost:3030");
@@ -27,9 +30,14 @@ const App = () => { // displays page based on functions and url
 			const messageType = messageParts[0];
 			switch (messageType) {
 				case "connected":
-					setPid(messageParts[1]);
+					setUid(messageParts[1]);
 					break;
-			
+				case "update":
+					setClickUid(messageParts[1]);
+					break;
+				case "estimated":
+					setallClick(messageParts[1]);
+					break;
 				default:
 					break;
 			}

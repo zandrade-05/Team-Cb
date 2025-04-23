@@ -12,7 +12,7 @@ const app: Express = express();
 //WebSocket server
 const WSPort = 3030;
 const RESTfulPort = 8080;
-const users: any = { };
+// const users: any = { };
 
 // const wsServer = new WebSocket.Server({ port : WSPort }, function() {
 //     console.log("Users WebSocket server ready");
@@ -51,6 +51,7 @@ const users: any = { };
 //     console.log("Connection closed")
 // });
 
+
 const wsServer = new WebSocket.Server({ port: WSPort }, () => {
     console.log("This sever is servething! Huzzah!");
 });
@@ -58,12 +59,33 @@ const wsServer = new WebSocket.Server({ port: WSPort }, () => {
 // Observer Pattern
 wsServer.on("connection", (socket: WebSocket) => {
     console.log("Client connected...");
+
+    socket.on("message", (inMessage: string) => {
+        console.log(`Message received: ${inMessage}`);
+        const messageParts: string[] = String(inMessage).split("_");
+
+        const messageType = messageParts[0];
+        switch(messageType) {
+            case "click":
+                const uid = messageParts[1];
+                wsServer.clients.forEach((inClient: WebSocket) => {
+                    inClient.send(`update_${uid}`);
+                });
+                break;
+            case "allClick":
+                //if everyone clicked the same card then that value should be returned to all users
+                wsServer.clients.forEach((inClient: WebSocket) => {
+                    inClient.send(`estimated_${uid}`);
+                });
+                break;
+        }
+    })
     
     // Create unique identifier to the client
-    const pid: string = `pid${new Date().getTime()}`;
+    const uid: string = `uid${new Date().getTime()}`;
 
     // construct connection message and return generated pid
-    const message = `connected_${pid}`;
+    const message = `connected_${uid}`;
     console.log(message);
     
     // Send message to client through socket
