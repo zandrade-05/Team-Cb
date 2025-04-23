@@ -137,15 +137,15 @@ const Story = (props: { story: UserStory | undefined; list: boolean }) => { // r
         }
         if (props.list) {
             return (
-                <li>
+                <div>
                     {story.toString()}
-                    <button onClick={deleteStory}>Delete</button>
-                </li>
+                    <button id="liStory" onClick={deleteStory}>Delete</button>
+                </div>
             )
         } else {
             return (<>
                 {story.toString()}
-                <button onClick={deleteStory}>Delete</button>
+                <button id="currentDelete" onClick={deleteStory}>Delete</button>
             </>)
         }
     }
