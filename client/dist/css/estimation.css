@@ -14,16 +14,54 @@ li button {
 .modal {
     display: flex;
     flex-direction: column;
+    max-height: 75vh;
 }
 .modal #storyDesc {
     resize: vertical;
-    max-height: 50vh;
-    min-height: fit-content;
+    height: 100px;
+    max-height: 40vh;
+    /* min-height: fit-content; */
+    margin-left: 20px;
+    margin-right: 20px;
+    font-size: 1rem;
+    border-radius: 10px;
+    border: 2px 2px 1px navy;
 }
 .modal #storyName {
     resize: none;
+    /* min-height: 20px; */
+    height: 40px;
+    max-height: 50vh;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+    font-size: 1rem;
+    border-radius: 10px;
+    border: 2px 2px 1px navy;
 }
+
+.modal #finishedButton {
+    background-color: white;
+    border: 3px navy solid; 
+    color: navy;
+    padding: 15px, 25px;
+    border-radius: 4px;
+    /* text-align: center; */
+    font-size: 25px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 /* Body Styles */
+.popup-content {
+    /* background-color: transparent; */
+    box-shadow: 3px 3px navy;
+    border-radius: 25px;
+}
+
 #root {
     display: grid;
     /* grid: 1fr 9fr / 1fr 1fr 2fr 2fr 1fr 1fr; */
@@ -32,6 +70,14 @@ li button {
     background-color: white !important;
     overflow: hidden !important;
     position: relative;
+}
+
+#bottomLine {
+    height: 5vh;
+    width: 100vw;
+    position: fixed;
+    bottom: 0px;
+    z-index: 10;
 }
 
 /* Header Styles */

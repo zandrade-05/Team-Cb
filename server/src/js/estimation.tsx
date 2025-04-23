@@ -30,6 +30,7 @@ const Estimation = () => { // returns Estimation page
         <CurrentQueue storyQueue={storyQueue} cards={cards} />
         <StQueue storyQueue={storyQueue} />
         <Estimations estimations={estimations} />
+        <div id="bottomLine"></div>
     </>)
 }
 const CurrentQueue = (props: { storyQueue: UserStoryQueue; cards: Cards }) => { // returns middle section of Estimation page
@@ -84,7 +85,7 @@ const StoryDialogBox = () => {
                 }}>
                 <input placeholder="Enter Story Name Here" name="storyName" id="storyName" onChange={event => {name = event.target.value}} required></input>
                 <textarea placeholder="Enter Story Description Here" name="description" id="storyDesc" onChange={event => {description = event.target.value}}></textarea>
-                <button type="submit" id="">Add Story</button>
+                <button type="submit" id="finishedButton">Submit</button>
             </form>
         </Popup>
     )
