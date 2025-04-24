@@ -199,7 +199,8 @@ const Estimations = (props: { estimations: UserStoryQueue }) => { // returns alr
 }
 const EstimationButton = (props: { card: Card }) => { // returns a single estimation card button
     const submit = () => {
-        fetch.post("estimations", { value: props.card.getValue() })
+        //change to websocket send message
+        fetch.post("estimations", { value: props.card.getValue() }); // Convert to intermediary WebSocket call
     }
     return (
         <li><button className="estButton" onClick={submit} value={props.card.getValue()}>{props.card.getValue()}</button></li>
