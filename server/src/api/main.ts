@@ -12,7 +12,6 @@ const app: Express = express();
 //WebSocket server
 const WSPort = 3030;
 const RESTfulPort = 8080;
-const users: any = { };
 
 const wsServer = new WebSocket.Server({ port: WSPort }, () => {
     console.log("This sever is servething! Huzzah!");
@@ -28,11 +27,13 @@ wsServer.on("connection", (socket: WebSocket) => {
 
         const messageType = messageParts[0];
         switch(messageType) {
-            case "click":
+            case "voted":
                 const uid = messageParts[1];
-                wsServer.clients.forEach((inClient: WebSocket) => {
-                    inClient.send(`update_${uid}`);
-                });
+                const voteValue = messageParts[2];
+                console.log(uid);
+                console.log(voteValue);
+                // update user's status to have voted and thier vote number
+                // voted();
                 break;
             case "allClick":
                 //if everyone clicked the same card then that value should be returned to all users

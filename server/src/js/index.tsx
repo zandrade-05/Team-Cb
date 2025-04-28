@@ -36,7 +36,6 @@ const App = () => { // displays page based on functions and url
 					} else {
 						setUid(storedUID);
 					}
-					// console.log("Testing");
 					break;
 				case "update":
 					setClickUid(messageParts[1]);
@@ -50,14 +49,19 @@ const App = () => { // displays page based on functions and url
 		};
 		setWs(connection);
     },[]);
+	
+	const sendMessage = (message: string) => {
+		console.log(`WS message sent: ${message}`);
+		ws.send(message);
+	};
     
     return (
         <BrowserRouter>
             <Routes>
                 <Route path="/"> /* base url path */
-                    <Route path="" element={<JoinRoom />} />
-                    <Route path="create-room" element={<CreateRoom />} />
-                    <Route path="estimate" element={<Estimation />} />
+                    <Route path="" element={<JoinRoom sendMessage={sendMessage} />} />
+                    <Route path="create-room" element={<CreateRoom sendMessage={sendMessage}/>} />
+                    <Route path="estimate" element={<Estimation sendMessage={sendMessage} />} />
                 </Route>
             </Routes>
         </BrowserRouter>
