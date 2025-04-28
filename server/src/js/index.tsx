@@ -4,7 +4,6 @@ import "../../../client/dist/css/common.css"
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import JoinRoom, { CreateRoom } from "./home";
 import { useEffect, useState } from "react";
-import { Card, Cards } from "./Cards"
 
 const App = () => { // displays page based on functions and url
     
@@ -12,8 +11,6 @@ const App = () => { // displays page based on functions and url
 	const [clickUid, setClickUid] = useState("");
 	const [allClick, setallClick] = useState("");
     const [ws, setWs] = useState({} as WebSocket);
-	let connectedUsers: any = {};
-
 
     useEffect(() => {
         const connection = new WebSocket("ws://localhost:3030");
@@ -53,23 +50,7 @@ const App = () => { // displays page based on functions and url
 		};
 		setWs(connection);
     },[]);
-
-
-	
-	const sendMessage = (message:string) => {
-		console.log(`WS message sent: ${message}`);
-		ws.send(message);
-	};
     
-	const buttonClick = () => {
-		sendMessage(`click_${uid}`);
-	}
-
-
-
-
-
-
     return (
         <BrowserRouter>
             <Routes>
