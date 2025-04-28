@@ -51,11 +51,11 @@ class User {
 }
 
 
-let users: User[];
+let users: User[] = new Array();
 
 const voted = () => {
     let hasEveryoneVoted = true;
-
+    
     users.forEach((person) => {
         if (hasEveryoneVoted) {
             hasEveryoneVoted = person.getHasVoted();
