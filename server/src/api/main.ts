@@ -17,6 +17,43 @@ const wsServer = new WebSocket.Server({ port: WSPort }, () => {
     console.log("This sever is servething! Huzzah!");
 });
 
+
+class User {
+    private uid: string;
+    private hasVoted: boolean;
+
+    constructor(newID: string, hasVoted: boolean) {
+        this.uid = newID;
+        this.hasVoted = false;
+    }
+
+    public setVote(hasVoted: boolean) {
+        this.hasVoted = hasVoted;
+    } 
+
+    public getVote() {
+        return this.hasVoted;
+    }
+}
+
+
+let users: User[];
+
+const Voted = () => {
+    let hasEveryoneVoted = true;
+
+    users.forEach((person) => {
+        if (hasEveryoneVoted) {
+            hasEveryoneVoted = person.getVote();
+        }
+    })
+
+    if(hasEveryoneVoted) {
+        
+    }
+}
+
+
 // Observer Pattern
 wsServer.on("connection", (socket: WebSocket) => {
     console.log("Client connected...");
@@ -54,6 +91,11 @@ wsServer.on("connection", (socket: WebSocket) => {
     // Send message to client through socket
     socket.send(message);
 });
+
+
+
+
+
 
 let storyCount = 0;
 app.use(express.json());
