@@ -6,7 +6,6 @@ import { NavLink, useNavigate } from "react-router-dom"
 import { Card, Cards } from "./Cards"
 import Popup from "reactjs-popup"
 import 'reactjs-popup/dist/index.css'
-import User from "./User"
 let storyQueue: UserStoryQueue = new UserStoryQueue();
 let estimations: UserStoryQueue = new UserStoryQueue();
 let cards: Cards = new Cards();
@@ -20,45 +19,10 @@ const fetch = axios.create({
     },
     timeout: 30000 // timeout in ms for http requests
 });
-const Estimation = (props: { connection: WebSocket, sendMessage: any} ) => { // returns Estimation page
+const Estimation = (props: { sendMessage: any }) => { // returns Estimation page
     let navigate = useNavigate();
-    const [users, setUsers] = useState({} as User[]);
     let sendMessage = props.sendMessage;
-    let connection = props.connection;
-        useEffect(() => {
-            connection.onopen = () => {
-                console.log("connection opened to the server...");
-            };
-            // Handle error
-            connection.onerror = () => {
-                console.log("WS error");
-            };
-            // Handle server message
-            connection.onmessage = (inMessage: any) => {
-                console.log(inMessage.data);
-                // Split message into underscores
-                const messageParts: string[] = inMessage.data.split("_");
-                // index 0 is message type
-                const messageType = messageParts[0];
-                switch (messageType) {
-                    case "new-user":
-                        let ourUsers = users;
-                        ourUsers.push(new User(messageParts[1], messageParts[2]));
-                        setUsers(ourUsers);
-                        users.forEach((user: User, i: number) => {
-                            localStorage.setItem("user" + i, user.toString());
-                        })
-                        break;
-    
-                    case "allVoted":
 
-                    default:
-                        
-                        break;
-                }
-            };
-        },[]);
-    
     return (<>
         <header>
             <h1>Got Scrum?</h1>
@@ -69,19 +33,20 @@ const Estimation = (props: { connection: WebSocket, sendMessage: any} ) => { // 
                 navigate("/");
             }}>Leave</button>
         </header>
-        <CurrentQueue users={users} sendMessage={sendMessage} storyQueue={storyQueue} cards={cards} />        <StQueue storyQueue={storyQueue} />
+        <CurrentQueue sendMessage={sendMessage} storyQueue={storyQueue} cards={cards} />
+        <StQueue storyQueue={storyQueue} />
         <Estimations estimations={estimations} />
         <div id="bottomLine"></div>
     </>)
 }
 
-const Player = (props: { name: string, id: string, points: string}) => {
-    if(props.name == "") {
+const Player = (props: { name: string, id: string, points: string }) => {
+    if (props.name == undefined) {
         return (
             <div className="player emptyPlayer" id={props.id}>
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
-                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
-                    <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
+                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
+                    <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708" />
                 </svg>
             </div>
         )
@@ -97,24 +62,19 @@ const Player = (props: { name: string, id: string, points: string}) => {
         )
     }
 }
-const Table = ( props: {users: User[]}) => {
+const Table = () => {
     let average;
-    let name = localStorage.getItem("name");
     let players: string[][];
-    if(name != null){
-        players = [[name, ""], ["",""], ["",""], ["",""], ["",""], ["",""]]
-    } else {
-        players = [["", ""], ["",""], ["",""], ["",""], ["",""], ["",""]]
-    }
+    players = [[localStorage.getItem("user0")?.split("_").at(1)!, localStorage.getItem("user0")?.split("_").at(2)!], [localStorage.getItem("user1")?.split("_").at(1)!, localStorage.getItem("user1")?.split("_").at(2)!], [localStorage.getItem("user2")?.split("_").at(1)!, localStorage.getItem("user2")?.split("_").at(2)!], [localStorage.getItem("user3")?.split("_").at(1)!, localStorage.getItem("user3")?.split("_").at(2)!], [localStorage.getItem("user4")?.split("_").at(1)!, localStorage.getItem("user4")?.split("_").at(2)!], [localStorage.getItem("user5")?.split("_").at(1)!, localStorage.getItem("user5")?.split("_").at(2)!]]
+
     let numPoints = 0;
     let totalPoints = 0;
-    console.log(props.users)
     players.forEach((player, i) => {
         let playerName = localStorage.getItem("user" + i)?.split("_")[1]
         let playerPoints = localStorage.getItem("user" + i)?.split("_")[2]
         if (playerName) {
             player[0] = playerName
-            if (playerPoints) {
+            if (playerPoints && parseInt(playerPoints) >= 0) {
                 player[1] = playerPoints
                 totalPoints += parseInt(playerPoints);
                 numPoints++;
@@ -128,9 +88,9 @@ const Table = ( props: {users: User[]}) => {
     }
     return (
         <>
-            <h4 id="avg">{average}</h4>
+            <h4 id="avg">{average ? average : "AVG"}</h4>
             <div id="players">
-                <Player name={players[0][0]} points={players[0][1]} id="player1" />
+                <Player name={players[0][0]} points={players[0][1] == "-1" ? "" : players[0][1]} id="player1" />
                 <Player name={players[1][0]} points={players[1][1]} id="player2" />
                 <Player name={players[2][0]} points={players[2][1]} id="player3" />
                 <Player name={players[3][0]} points={players[3][1]} id="player4" />
@@ -141,9 +101,8 @@ const Table = ( props: {users: User[]}) => {
         </>
     )
 }
-const CurrentQueue = (props: { users: User[], sendMessage: any, storyQueue: UserStoryQueue; cards: Cards }) => { // returns middle section of Estimation page
+const CurrentQueue = (props: { sendMessage: any, storyQueue: UserStoryQueue; cards: Cards }) => { // returns middle section of Estimation page
     const [currentCards, setCards] = React.useState(props.cards);
-    let users = props.users
     useEffect(() => { // gets estimated stories
         fetch.get("cards").then((response) => {
             setCards(response.data);
@@ -154,8 +113,6 @@ const CurrentQueue = (props: { users: User[], sendMessage: any, storyQueue: User
         })
     }, [])
     currentStory = storyQueue.findAt(0);
-    let avg: number;
-    let total = 0;
     let cardsList = cards.getCards();
     let sendMessage = props.sendMessage;
     cardsList.sort(function (a: any, b: any) { return a.cardValue - b.cardValue })
@@ -164,7 +121,8 @@ const CurrentQueue = (props: { users: User[], sendMessage: any, storyQueue: User
             <>
                 {cardsList.map((card, i) => (
 
-                <EstimationButton sendMessage={sendMessage} key={i} card={card} />                ))}
+                    <EstimationButton sendMessage={sendMessage} key={i} card={card} />
+                ))}
             </>
         );
     }
@@ -174,7 +132,7 @@ const CurrentQueue = (props: { users: User[], sendMessage: any, storyQueue: User
                 <h3>Now estimating:</h3>
                 <h4 className="deleteParent"><Story story={currentStory} list={false} /></h4>
             </div>
-            <Table users={users} />
+            <Table />
             <ul>
                 <ListCards />
             </ul>
@@ -187,12 +145,12 @@ const StoryDialogBox = () => {
     let description = "";
     return (
         <Popup trigger={<button id="storyButton">Add Story</button>} modal nested>
-            <form className="modal" onSubmit={() => {
+            <form className="modal" autoComplete="off" onSubmit={() => {
                 let story = new UserStory(name);
                 story.setDescription(description);
                 fetch.post("storyQueue", story)
             }}>
-                <input placeholder="Enter Story Name Here" name="storyName" id="storyName" onChange={event => { name = event.target.value }} required></input>
+                <input autoComplete="off" placeholder="Enter Story Name Here" name="storyName" id="storyName" onChange={event => { name = event.target.value }} required></input>
                 <textarea placeholder="Enter Story Description Here" name="description" id="storyDesc" onChange={event => { description = event.target.value }}></textarea>
                 <button type="submit" id="finishedButton">Submit</button>
             </form>
@@ -216,9 +174,7 @@ const StQueue = (props: { storyQueue: UserStoryQueue }) => { // returns the stor
             stories.push(<Story key={index} story={storyQueue.findAt(index)} list={true} />)
         }
         stories.push(<StoryDialogBox key={0} />)
-        // stories.push(<div key={0}><button id="storyButton" onClick={() => {
-        //     fetch.post("storyQueue", new UserStory("New story"))
-        // }}>Add Story</button></div>)
+
         return stories
     }
     return (
@@ -247,7 +203,7 @@ const Story = (props: { story: UserStory | undefined; list: boolean }) => { // r
                 <li className="deleteParent" onDragOver={(e) => {
                     e.preventDefault();
                 }}>
-                    <div className="draggable" draggable id={"" + story.id} onDragStart={(e) => {
+                    <div className="draggable" draggable id={"" + story.storyNum} onDragStart={(e) => {
                         storyID = e.currentTarget.id
                     }} onDrop={(e) => {
                         fetch.post("setStoryID", [storyID, e.currentTarget.id])
@@ -319,11 +275,18 @@ const EstimationButton = (props: { sendMessage: any, card: Card }) => { // retur
     let sendMessage = props.sendMessage;
     const submit = () => {
         // change to websocket send message
-        // fetch.post("estimations", { value: props.card.getValue() });
         sendMessage(`voted_${localStorage.getItem("UID")}_${props.card.getValue()}`);
     }
+    if (props.card.getValue() >= 0) {
+        return (
+            <li><button className="estButton" onClick={submit} value={props.card.getValue()}>{props.card.getValue()}</button></li>
+        )
+    }
     return (
-        <li><button className="estButton" onClick={submit} value={props.card.getValue()}>{props.card.getValue()}</button></li>
+        <li><button className="estButton" onClick={submit} value={props.card.getValue()}><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="black" viewBox="0 0 16 16">
+            <path d="M14.778.085A.5.5 0 0 1 15 .5V8a.5.5 0 0 1-.314.464L14.5 8l.186.464-.003.001-.006.003-.023.009a12 12 0 0 1-.397.15c-.264.095-.631.223-1.047.35-.816.252-1.879.523-2.71.523-.847 0-1.548-.28-2.158-.525l-.028-.01C7.68 8.71 7.14 8.5 6.5 8.5c-.7 0-1.638.23-2.437.477A20 20 0 0 0 3 9.342V15.5a.5.5 0 0 1-1 0V.5a.5.5 0 0 1 1 0v.282c.226-.079.496-.17.79-.26C4.606.272 5.67 0 6.5 0c.84 0 1.524.277 2.121.519l.043.018C9.286.788 9.828 1 10.5 1c.7 0 1.638-.23 2.437-.477a20 20 0 0 0 1.349-.476l.019-.007.004-.002h.001M14 1.221c-.22.078-.48.167-.766.255-.81.252-1.872.523-2.734.523-.886 0-1.592-.286-2.203-.534l-.008-.003C7.662 1.21 7.139 1 6.5 1c-.669 0-1.606.229-2.415.478A21 21 0 0 0 3 1.845v6.433c.22-.078.48-.167.766-.255C4.576 7.77 5.638 7.5 6.5 7.5c.847 0 1.548.28 2.158.525l.028.01C9.32 8.29 9.86 8.5 10.5 8.5c.668 0 1.606-.229 2.415-.478A21 21 0 0 0 14 7.655V1.222z" />
+        </svg></button></li>
+
     )
 }
 export default Estimation;
