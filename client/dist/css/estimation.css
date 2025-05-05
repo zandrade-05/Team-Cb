@@ -60,6 +60,7 @@
     margin-top: 20px;
 }
 
+/* Common Estimation Styles */
 li .estButton {
     font-size: 1.25rem;
     background-color: rgba(211, 211, 211, 0.211);
@@ -71,7 +72,6 @@ li .estButton {
     text-align: center;
     box-shadow: rgba(0, 0, 128, 0.25) 2px 2px 5px;
 }
-
 .modal {
     display: flex;
     flex-direction: column;
@@ -99,7 +99,6 @@ li .estButton {
     border-radius: 10px;
     border: 2px 2px 1px navy;
 }
-
 .modal #finishedButton {
     background-color: white;
     border: 3px navy solid; 
@@ -118,7 +117,6 @@ li .estButton {
     box-shadow: 3px 3px navy;
     border-radius: 25px;
 }
-
 #root {
     display: grid;
     grid: 1fr 9fr/ 240px 1fr 240px;
@@ -127,7 +125,6 @@ li .estButton {
     overflow: hidden !important;
     position: relative;
 }
-
 #bottomLine {
     height: 5vh;
     width: 100vw;
@@ -146,7 +143,6 @@ header {
     grid: auto / 25vw;
     box-shadow: inset rgba(0, 0, 128, 0.25) 0px -7px 25px;
 }
-
 header>h1 {
     grid-row: 1 / span 2;
     grid-column: 2 / span 2;
@@ -154,7 +150,6 @@ header>h1 {
     line-height: 15vh;
     font-size: 4rem;
 }
-
 header>h5 {
     padding: 25px;
     grid-row: 1 / span 2;
@@ -162,7 +157,6 @@ header>h5 {
     text-align: left;
     font-size: 1rem;
 }
-
 header>button {
     cursor: pointer;
     grid-row: 1 / span 2;
@@ -191,7 +185,6 @@ header>button {
     box-shadow: inset rgba(0, 0, 128, 0.25) 0px 0px 10px;
     height: 80vh;
 }
-
 #currentQueue div {
     position: absolute;
     top: 0;
@@ -202,10 +195,9 @@ header>button {
     height: 70px;
     border-bottom: 1px navy solid;
     overflow-wrap: break-word;
-    word-wrap: break-word; /* For legacy support */
+    word-wrap: break-word;
     word-break: break-word;
 }
-
 #currentQueue>div>h3 {
     grid-column: 1;
     font-weight: 300;
@@ -214,7 +206,6 @@ header>button {
     text-align: right;
     margin-right: 20px;
 }
-
 #currentQueue>div>h4 {
     grid-column: 2;
     font-size: 1.2rem;
@@ -228,7 +219,6 @@ header>button {
     text-align: center  ;
 
 }
-
 #currentQueue>ul {
     list-style-type: none;
     padding-left: 0px;
@@ -248,7 +238,6 @@ header>button {
     gap: 20px 10px;
     margin-bottom: -80px;
 }
-
 #currentQueue>ul>li {
     width: auto;
     display: inline-block;
@@ -257,7 +246,6 @@ header>button {
     text-align: center;
     display: flex;
 }
-
 #currentQueue #avg {
     position: fixed;
     transform: translateX(-50%);
@@ -274,7 +262,6 @@ header>button {
     margin: 0;
     border-radius: 50%;
 }
-
 #currentQueue img {
     padding-top: 70px;
     width: 100%;  
@@ -289,7 +276,6 @@ header>button {
     box-shadow: inset rgba(0, 0, 128, 0.25) 5px 0px 10px;
     overflow-y: scroll;
 }
-
 h2 {
     text-align: center;
     padding: 10px 0px;
@@ -298,20 +284,17 @@ h2 {
     color: navy;
     height: 45px;
 }
-
 #storyQueue>h6 {
     font-size: 1rem;
     padding-left: 40px;
     margin: 10px 0px;
 }
-
 #storyQueue>ol {
     width: calc(75%);
     list-style-type: none;
     display: grid;
     grid: auto / auto;
 }
-
 #storyQueue>ol>li {
     font-size: 1.2rem;
     margin: 0px;
@@ -352,7 +335,6 @@ h2 {
     color: navy;
     padding: 100px, 80px;
     border-radius: 4px;
-    /* text-align: center; */
     font-size: 30px;
     position: fixed;
     bottom: 120px;
@@ -374,12 +356,10 @@ h2 {
     box-shadow: inset rgba(0, 0, 128, 0.25) -5px 0px 10px;
     overflow-y: scroll;
 }
-
 #estimations>ul {
     list-style-type: none;
     padding: 10px;
 }
-
 #estimations > ul > li {
     display: inline-block;
     width: 5rem;
@@ -388,52 +368,40 @@ h2 {
     text-align: center;
     margin: 10px;
 }
-
 .story-small {
     background-color: #d4edda;
     border-left: 4px solid #28a745;
     padding: 8px;
 }
-
 .story-medium {
     background-color: #fff3cd;
     border-left: 4px solid #ffc107;
     padding: 8px;
 }
-
 .story-large {
     background-color: #f8d7da;
     border-left: 4px solid #dc3545;
     padding: 8px;
 }
-
-/* width */
 ::-webkit-scrollbar {
     width: 10px;
-  }
-  
-  /* Track */
-  ::-webkit-scrollbar-track {
+}
+::-webkit-scrollbar-track {
     background: whitesmoke;
-  }
-  
-  /* Handle */
-  ::-webkit-scrollbar-thumb {
+}
+::-webkit-scrollbar-thumb {
     background: rgba(0, 0, 128, 0.50);
     border-radius: 10px;
-  }
-  
-  /* Handle on hover */
-  ::-webkit-scrollbar-thumb:hover {
+}
+::-webkit-scrollbar-thumb:hover {
     background: navy;
     border-radius: 25px;
-  }
+}
 
 /* Action Styles */
 #storyQueue>ol>li>button:hover {
     letter-spacing: 1px;
 }
-
 header>a:hover,
 #currentQueue>ul>li:hover {
     box-shadow: none;
@@ -441,18 +409,16 @@ header>a:hover,
 
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 768px) {
-
     #storyQueue h6, #storyQueue ol, #storyQueue li {
         padding-left: 0px;
         overflow-wrap: break-word;
-        word-wrap: break-word; /* For legacy support */
+        word-wrap: break-word;
         word-break: break-word;
         text-align: center;
         height: 50px;
         line-height: 50px;
         margin: 0px auto;
     }
-
     #storyQueue > ol, #estimations > ul { 
         text-align: center;
     }
@@ -491,13 +457,11 @@ header>a:hover,
     #currentQueue>div>h4 {
         width: calc(50%);
     }
-
     #root > #currentQueue > ul {
         margin-top: 200px;
         margin-bottom: -100px;
     }
 }
-
 @media only screen and (min-width: 1400px) {
     #root {
         display: grid;
@@ -506,7 +470,6 @@ header>a:hover,
     #storyButton {
         left: 120px;
     }
-
     .liStory {
         left: 245px;
     }
@@ -514,22 +477,18 @@ header>a:hover,
         width: calc(40%);
     }
 }
-
 .story-small {
     background-color: #d4edda;
     border-left: 4px solid #28a745;
     padding: 8px;
 }
-
 .story-medium {
     background-color: #fff3cd;
     border-left: 4px solid #ffc107;
     padding: 8px;
 }
-
 .story-large {
     background-color: #f8d7da;
     border-left: 4px solid #dc3545;
     padding: 8px;
 }
-
